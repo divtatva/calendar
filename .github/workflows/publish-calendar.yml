@@ -33,9 +33,15 @@ jobs:
         with:
           python-version: "3.13"
 
+      - name: Install Poetry
+        run: pipx install poetry
+
+      - name: Install project dependencies
+        run: poetry install --only main --no-root
+
       - name: Generate today's Pune calendar JSON
         run: >-
-          python -m calendar_cli
+          poetry run python -m calendar_cli
           --date "$(date +'%Y-%m-%d')"
           --city Pune
           --latitude 18.5204
